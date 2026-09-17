@@ -1,17 +1,19 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <!-- SEO Tags (Very Important for Google) -->
+  <!-- SEO Tags: كلمات مفتاحية و وصف مهم جداً لظهورك في بحث جوجل -->
   <title>Crypto News & Market Updates | SwapFee</title>
   <meta name="description" content="Stay updated with the latest cryptocurrency news, Bitcoin trends, Ethereum updates, and blockchain technology market analysis brought to you by SwapFee.">
   <meta name="keywords" content="crypto news, cryptocurrency, bitcoin news, ethereum, blockchain, market updates, SwapFee">
   <meta name="robots" content="index, follow">
 
   <style>
+    /* =========================================================
+       SWAPFEE — NEWS PAGE STYLING (Matching the main UI perfectly)
+       ========================================================= */
     :root {
       --bg: #020408;
       --cyan: #4facfe;
@@ -22,14 +24,15 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      font-family: Inter, sans-serif;
-      background: var(--bg);
+      font-family: Inter, ui-sans-serif, -apple-system, sans-serif;
+      background: radial-gradient(circle at top, #0f1c2e 0%, #020408 60%);
       color: var(--text);
       min-height: 100vh;
-      background-image: radial-gradient(circle at top, #0f1c2e 0%, #020408 60%);
+      display: flex;
+      flex-direction: column;
     }
 
-    /* Header matching the main site */
+    /* Header */
     header {
       width: min(1180px, calc(100% - 40px));
       margin: 0 auto;
@@ -37,46 +40,47 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      border-bottom: 1px solid rgba(0, 234, 255, 0.2);
+      border-bottom: 1px solid rgba(0, 234, 255, 0.15);
     }
-
-    .brand {
-      display: flex; align-items: center; gap: 12px;
-      text-decoration: none; color: white;
+    
+    .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: white; }
+    
+    .brand-mark {
+      width: 38px; height: 38px; border-radius: 12px;
+      background: linear-gradient(145deg, rgba(79, 172, 254, 0.28), rgba(0, 234, 255, 0.04));
+      border: 1px solid rgba(111, 211, 255, 0.3); display: grid; place-items: center;
     }
+    .brand-mark::before { content: ""; width: 16px; height: 16px; border: 2px solid var(--cyan-bright); border-radius: 50%; }
+    
     .brand-name { font-size: 18px; font-weight: 800; letter-spacing: 0.18em; }
     .brand-name span { color: var(--cyan-bright); }
 
     .back-btn {
-      padding: 10px 20px;
-      border-radius: 99px;
-      background: transparent;
-      border: 1px solid var(--text);
-      color: var(--text);
-      text-decoration: none;
-      font-size: 13px;
-      font-weight: 600;
-      transition: 0.3s;
+      padding: 8px 16px; border-radius: 999px;
+      background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.2);
+      color: var(--text); text-decoration: none; font-size: 12px; font-weight: 600;
+      transition: all 0.3s;
     }
     .back-btn:hover { background: var(--text); color: var(--bg); }
 
     /* Main SEO Content */
     main {
       width: min(1000px, calc(100% - 40px));
-      margin: 40px auto;
+      margin: 50px auto;
+      flex: 1;
     }
 
     h1 {
       font-size: clamp(32px, 5vw, 48px);
-      margin-bottom: 10px;
-      color: var(--cyan-bright);
+      margin-bottom: 12px;
+      background: linear-gradient(105deg, #ffffff 0%, #00eaff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 900;
     }
 
     .page-desc {
-      color: #8290a3;
-      font-size: 16px;
-      margin-bottom: 40px;
-      line-height: 1.6;
+      color: #8290a3; font-size: 16px; margin-bottom: 50px; line-height: 1.6; max-width: 600px;
     }
 
     /* News Grid */
@@ -87,92 +91,90 @@
     }
 
     article.news-card {
-      background: rgba(10, 16, 26, 0.85);
-      border: 1px solid rgba(104, 210, 255, 0.15);
-      border-radius: 16px;
-      padding: 25px;
-      transition: transform 0.3s ease;
+      background: linear-gradient(145deg, rgba(20, 31, 45, 0.6), rgba(5, 10, 17, 0.5));
+      border: 1px solid rgba(104, 210, 255, 0.2);
+      border-radius: 20px;
+      padding: 30px;
+      transition: transform 0.3s ease, border-color 0.3s ease;
+      backdrop-filter: blur(10px);
     }
     article.news-card:hover {
-      transform: translateY(-5px);
+      transform: translateY(-6px);
       border-color: var(--cyan-bright);
+      box-shadow: 0 10px 40px rgba(0, 234, 255, 0.1);
     }
 
     .news-date {
-      font-size: 12px;
+      font-size: 11px;
       color: var(--cyan);
-      margin-bottom: 10px;
+      margin-bottom: 15px;
       display: block;
-      font-weight: bold;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
     }
 
     .news-card h2 {
-      font-size: 20px;
-      margin-bottom: 15px;
-      line-height: 1.4;
-      color: #fff;
+      font-size: 22px; margin-bottom: 15px; line-height: 1.4; color: #fff; font-weight: 700;
     }
 
     .news-card p {
-      color: #7f8da0;
-      font-size: 14px;
-      line-height: 1.6;
-      margin-bottom: 20px;
+      color: #7f8da0; font-size: 14px; line-height: 1.7; margin-bottom: 25px;
     }
 
     .read-more {
-      display: inline-block;
-      color: var(--cyan-bright);
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 14px;
+      display: inline-block; color: var(--cyan-bright); text-decoration: none;
+      font-weight: 700; font-size: 13px; letter-spacing: 0.05em;
     }
     .read-more:hover { text-decoration: underline; }
 
-    footer { text-align: center; padding: 40px; color: #536274; font-size: 12px; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 50px; }
+    footer { text-align: center; padding: 40px; color: #394553; font-size: 11px; border-top: 1px solid rgba(255,255,255,0.05); }
 
+    @media (max-width: 720px) {
+      header { padding: 18px 0; }
+      .brand-name { font-size: 15px; }
+      .brand-mark { width: 34px; height: 34px; }
+      main { margin: 30px auto; }
+      article.news-card { padding: 20px; }
+      .news-card h2 { font-size: 18px; }
+    }
   </style>
 </head>
 <body>
 
   <header>
     <a class="brand" href="index.html">
+      <div class="brand-mark"></div>
       <div class="brand-name">SWAP<span>FEE</span></div>
     </a>
-    <a href="index.html" class="back-btn">← Back to Swap</a>
+    <a href="index.html" class="back-btn">← Swap</a>
   </header>
 
   <main>
-    <!-- H1 is critical for SEO -->
-    <h1>Latest Crypto Market News</h1>
-    <p class="page-desc">Stay ahead of the market. Read our latest insights on Bitcoin, Ethereum, Altcoins, and Blockchain technology trends.</p>
+    <h1>Latest Crypto Insights</h1>
+    <p class="page-desc">Stay ahead of the market. Read our latest news and analysis on Bitcoin, Altcoins, and Blockchain technology trends.</p>
 
     <div class="news-grid">
-      
-      <!-- Article 1 -->
       <article class="news-card">
         <span class="news-date">Sept 17, 2026</span>
         <h2>Bitcoin Surges Past Key Resistance Levels</h2>
-        <p>In a surprising market movement today, Bitcoin has broken through its major resistance barriers, signaling a potential bullish run for the upcoming quarter. Institutional adoption continues to rise.</p>
+        <p>In a surprising market movement today, Bitcoin has broken through its major resistance barriers, signaling a potential bullish run. Institutional adoption continues to rise across global markets.</p>
         <a href="#" class="read-more">Read Full Story →</a>
       </article>
 
-      <!-- Article 2 -->
       <article class="news-card">
         <span class="news-date">Sept 16, 2026</span>
-        <h2>Ethereum's New Upgrade: What It Means for Gas Fees</h2>
-        <p>The latest network upgrade on the Ethereum blockchain aims to significantly reduce layer-2 gas fees. Developers expect a massive influx of decentralized applications.</p>
+        <h2>Ethereum's New Upgrade: Impact on Gas Fees</h2>
+        <p>The latest network upgrade on the Ethereum blockchain aims to significantly reduce layer-2 gas fees. Developers expect a massive influx of decentralized applications and increased user activity.</p>
         <a href="#" class="read-more">Read Full Story →</a>
       </article>
 
-      <!-- Article 3 -->
       <article class="news-card">
         <span class="news-date">Sept 15, 2026</span>
         <h2>Top 5 Altcoins to Watch This Month</h2>
-        <p>With Bitcoin dominance shifting, several altcoins are showing promising chart patterns. We dive deep into the technology and market cap of the top performers this week.</p>
+        <p>With Bitcoin dominance shifting, several altcoins are showing promising chart patterns. We dive deep into the technology and market cap of the top performers making headlines this week.</p>
         <a href="#" class="read-more">Read Full Story →</a>
       </article>
-
     </div>
   </main>
 
