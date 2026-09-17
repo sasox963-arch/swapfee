@@ -6,40 +6,239 @@
   <title>SwapFee — Best Crypto Swap Rates</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
+    html, body {
+      width: 100%;
+      min-height: 100vh;
+      overflow-x: hidden;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: #0b0e11;
+      background: #05070a;
       color: #fff;
+    }
+    #bg-canvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .content {
+      position: relative;
+      z-index: 1;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 24px;
+      padding: 40px 24px;
+      text-align: center;
     }
-    h1 { font-size: 28px; margin-bottom: 8px; text-align: center; }
-    p.subtitle { color: #8b98a5; font-size: 14px; margin-bottom: 28px; text-align: center; }
-    .widget-wrap { width: 100%; max-width: 680px; }
-    iframe {
-      border: none;
-      border-radius: 10px;
-      overflow: hidden;
+    h1 {
+      font-size: 42px;
+      font-weight: 700;
+      letter-spacing: -1px;
+      margin-bottom: 12px;
+      background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    p.subtitle {
+      color: #8b98a5;
+      font-size: 16px;
+      margin-bottom: 36px;
+      max-width: 520px;
+    }
+    .widget-wrap {
       width: 100%;
       max-width: 680px;
-      height: 330px;
-      box-shadow: 0px 0px 32px 0px rgba(0, 0, 0, 0.06);
+      background: rgba(15, 20, 28, 0.55);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(79, 172, 254, 0.18);
+      border-radius: 18px;
+      padding: 14px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.55), 0 0 40px rgba(79, 172, 254, 0.12);
+    }
+    iframe {
+      border: none;
+      border-radius: 12px;
+      overflow: hidden;
+      width: 100%;
+      height: 340px;
+      display: block;
+    }
+    .features {
+      display: flex;
+      gap: 28px;
+      margin-top: 36px;
+      flex-wrap: wrap;
+      justify-content: center;
+      color: #8b98a5;
+      font-size: 13px;
+    }
+    .features span::before {
+      content: "• ";
+      color: #4facfe;
+    }
+    footer {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 24px;
+      color: #4a5560;
+      font-size: 12px;
     }
   </style>
 </head>
 <body>
-  <h1>SwapFee</h1>
-  <p class="subtitle">Swap crypto at the best rates — fast, private, no registration</p>
-  <div class="widget-wrap">
-    <iframe
-      id="stealthex-widget"
-      src="https://stealthex.io/widget/f70f0188-5e17-4617-8d56-1323ce5cd134"
-      allow="clipboard-read; clipboard-write">
-    </iframe>
+  <canvas id="bg-canvas"></canvas>
+
+  <div class="content">
+    <h1>SwapFee</h1>
+    <p class="subtitle">Swap crypto instantly — best rates, no registration, private by default.</p>
+
+    <div class="widget-wrap">
+      <iframe
+        id="stealthex-widget"
+        src="https://stealthex.io/widget/f70f0188-5e17-4617-8d56-1323ce5cd134"
+        allow="clipboard-read; clipboard-write">
+      </iframe>
+    </div>
+
+    <div class="features">
+      <span>No registration</span>
+      <span>Best rates</span>
+      <span>2000+ coins</span>
+      <span>24/7 support</span>
+    </div>
   </div>
+
+  <footer>© 2026 SwapFee.com — Powered by StealthEX</footer>
+
+  <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+  <script>
+    // ==== 3D Particle Network Background ====
+    const canvas = document.getElementById('bg-canvas');
+    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.z = 60;
+
+    // Particles
+    const particleCount = 220;
+    const positions = new Float32Array(particleCount * 3);
+    const velocities = [];
+
+    for (let i = 0; i < particleCount; i++) {
+      positions[i * 3]     = (Math.random() - 0.5) * 140;
+      positions[i * 3 + 1] = (Math.random() - 0.5) * 100;
+      positions[i * 3 + 2] = (Math.random() - 0.5) * 100;
+      velocities.push({
+        x: (Math.random() - 0.5) * 0.04,
+        y: (Math.random() - 0.5) * 0.04,
+        z: (Math.random() - 0.5) * 0.04
+      });
+    }
+
+    const particleGeo = new THREE.BufferGeometry();
+    particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
+    const particleMat = new THREE.PointsMaterial({
+      color: 0x4facfe,
+      size: 0.9,
+      transparent: true,
+      opacity: 0.85,
+      blending: THREE.AdditiveBlending
+    });
+
+    const particles = new THREE.Points(particleGeo, particleMat);
+    scene.add(particles);
+
+    // Connection lines
+    const lineMat = new THREE.LineBasicMaterial({
+      color: 0x1e5fa8,
+      transparent: true,
+      opacity: 0.18
+    });
+
+    const lineGeo = new THREE.BufferGeometry();
+    const maxLines = 400;
+    const linePositions = new Float32Array(maxLines * 6);
+    lineGeo.setAttribute('position', new THREE.BufferAttribute(linePositions, 3));
+    const lines = new THREE.LineSegments(lineGeo, lineMat);
+    scene.add(lines);
+
+    // Mouse influence
+    const mouse = { x: 0, y: 0 };
+    window.addEventListener('mousemove', (e) => {
+      mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+      mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+    });
+
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+
+    function animate() {
+      requestAnimationFrame(animate);
+
+      const pos = particleGeo.attributes.position.array;
+
+      for (let i = 0; i < particleCount; i++) {
+        pos[i * 3]     += velocities[i].x;
+        pos[i * 3 + 1] += velocities[i].y;
+        pos[i * 3 + 2] += velocities[i].z;
+
+        // Bounce boundaries
+        if (Math.abs(pos[i * 3])     > 70) velocities[i].x *= -1;
+        if (Math.abs(pos[i * 3 + 1]) > 50) velocities[i].y *= -1;
+        if (Math.abs(pos[i * 3 + 2]) > 50) velocities[i].z *= -1;
+      }
+      particleGeo.attributes.position.needsUpdate = true;
+
+      // Build lines between nearby particles
+      let lineIndex = 0;
+      const maxDist = 14;
+      for (let i = 0; i < particleCount && lineIndex < maxLines; i++) {
+        for (let j = i + 1; j < particleCount && lineIndex < maxLines; j++) {
+          const dx = pos[i * 3]     - pos[j * 3];
+          const dy = pos[i * 3 + 1] - pos[j * 3 + 1];
+          const dz = pos[i * 3 + 2] - pos[j * 3 + 2];
+          const dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
+          if (dist < maxDist) {
+            const idx = lineIndex * 6;
+            linePositions[idx]     = pos[i * 3];
+            linePositions[idx + 1] = pos[i * 3 + 1];
+            linePositions[idx + 2] = pos[i * 3 + 2];
+            linePositions[idx + 3] = pos[j * 3];
+            linePositions[idx + 4] = pos[j * 3 + 1];
+            linePositions[idx + 5] = pos[j * 3 + 2];
+            lineIndex++;
+          }
+        }
+      }
+      lineGeo.setDrawRange(0, lineIndex * 2);
+      lineGeo.attributes.position.needsUpdate = true;
+
+      // Smooth camera parallax with mouse
+      camera.position.x += (mouse.x * 8 - camera.position.x) * 0.03;
+      camera.position.y += (mouse.y * 6 - camera.position.y) * 0.03;
+      camera.lookAt(scene.position);
+
+      // Slow rotation of particle system
+      particles.rotation.y += 0.0006;
+      lines.rotation.y += 0.0006;
+
+      renderer.render(scene, camera);
+    }
+
+    animate();
+  </script>
 </body>
 </html>
