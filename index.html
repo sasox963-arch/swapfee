@@ -7,78 +7,25 @@
   <meta name="description" content="Swap crypto instantly with SwapFee. Compare crypto swap rates with no registration.">
 
   <style>
-    /* =========================================================
-       SWAPFEE — PREMIUM CRYPTO INTERFACE
-       Visual layer only.
-       Affiliate widget iframe preserved.
-       ========================================================= */
-
     :root {
       --bg: #020408;
-      --panel: rgba(8, 13, 21, 0.72);
-      --panel-strong: rgba(10, 16, 26, 0.88);
-
       --cyan: #4facfe;
       --cyan-bright: #00eaff;
-      --blue: #367cff;
-
       --text: #f5f9ff;
-      --muted: #8290a3;
-      --dim: #4d5968;
-
-      --border: rgba(104, 187, 255, 0.15);
-      --border-bright: rgba(104, 210, 255, 0.35);
-
-      --shadow:
-        0 30px 100px rgba(0, 0, 0, 0.7),
-        0 0 80px rgba(0, 164, 255, 0.08);
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      width: 100%;
-      min-height: 100%;
-      background: var(--bg);
-      scroll-behavior: smooth;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       width: 100%;
       min-height: 100vh;
       overflow-x: hidden;
-
-      font-family:
-        Inter,
-        ui-sans-serif,
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        sans-serif;
-
+      font-family: Inter, sans-serif;
       color: var(--text);
-      background:
-        radial-gradient(
-          circle at 50% -10%,
-          rgba(0, 183, 255, 0.13),
-          transparent 38%
-        ),
-        radial-gradient(
-          circle at 10% 80%,
-          rgba(54, 124, 255, 0.07),
-          transparent 35%
-        ),
-        var(--bg);
+      background: var(--bg);
     }
 
-    /* =========================================================
-       BACKGROUND
-       ========================================================= */
-
+    /* 3D Background Canvas */
     #bg-canvas {
       position: fixed;
       inset: 0;
@@ -88,45 +35,7 @@
       pointer-events: none;
     }
 
-    .noise {
-      position: fixed;
-      inset: 0;
-      z-index: 1;
-      pointer-events: none;
-      opacity: 0.025;
-      background-image:
-        url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E");
-    }
-
-    .grid {
-      position: fixed;
-      inset: 0;
-      z-index: 1;
-      pointer-events: none;
-      background-image:
-        linear-gradient(rgba(100, 190, 255, 0.025) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(100, 190, 255, 0.025) 1px, transparent 1px);
-      background-size: 70px 70px;
-      mask-image: linear-gradient(to bottom, black 0%, transparent 75%);
-    }
-
-    .vignette {
-      position: fixed;
-      inset: 0;
-      z-index: 2;
-      pointer-events: none;
-      background:
-        radial-gradient(
-          ellipse at center,
-          transparent 25%,
-          rgba(0, 0, 0, 0.58) 100%
-        );
-    }
-
-    /* =========================================================
-       HEADER
-       ========================================================= */
-
+    /* Header styling with New Button */
     header {
       position: relative;
       z-index: 10;
@@ -147,75 +56,51 @@
     }
 
     .brand-mark {
-      position: relative;
-      width: 38px;
-      height: 38px;
+      width: 38px; height: 38px;
       border-radius: 12px;
-      background: linear-gradient(145deg, rgba(79, 172, 254, 0.28), rgba(0, 234, 255, 0.04));
-      border: 1px solid rgba(111, 211, 255, 0.3);
-      box-shadow: inset 0 0 18px rgba(0, 217, 255, 0.1), 0 0 25px rgba(0, 183, 255, 0.12);
-      display: grid;
-      place-items: center;
-      overflow: hidden;
+      background: linear-gradient(145deg, rgba(79,172,254,0.28), rgba(0,234,255,0.04));
+      border: 1px solid rgba(111,211,255,0.3);
+      display: grid; place-items: center;
     }
-
     .brand-mark::before {
       content: "";
-      width: 16px;
-      height: 16px;
+      width: 16px; height: 16px;
       border: 2px solid var(--cyan-bright);
       border-radius: 50%;
-      box-shadow: 0 0 12px rgba(0, 234, 255, 0.7), inset 0 0 8px rgba(0, 234, 255, 0.25);
     }
+    .brand-name { font-size: 18px; font-weight: 800; letter-spacing: 0.18em; }
+    .brand-name span { color: var(--cyan-bright); }
 
-    .brand-name {
-      font-size: 18px;
-      font-weight: 800;
-      letter-spacing: 0.18em;
-    }
-
-    .brand-name span {
-      color: var(--cyan-bright);
-    }
-
-    .status {
+    /* The New SEO News Button */
+    .nav-links {
       display: flex;
       align-items: center;
-      gap: 8px;
-      padding: 8px 13px;
-      border-radius: 999px;
-      background: rgba(0, 255, 170, 0.045);
-      border: 1px solid rgba(0, 255, 170, 0.13);
-      color: #8fa99f;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+      gap: 15px;
+    }
+    .news-btn {
+      padding: 10px 20px;
+      border-radius: 99px;
+      background: rgba(0, 234, 255, 0.1);
+      border: 1px solid var(--cyan-bright);
+      color: var(--cyan-bright);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+    .news-btn:hover {
+      background: var(--cyan-bright);
+      color: #000;
+      box-shadow: 0 0 20px rgba(0, 234, 255, 0.5);
     }
 
-    .status-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: #00e6a1;
-      box-shadow: 0 0 10px rgba(0, 230, 161, 0.8);
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 0.45; transform: scale(0.85); }
-      50% { opacity: 1; transform: scale(1.15); }
-    }
-
-    /* =========================================================
-       MAIN
-       ========================================================= */
-
+    /* Main Content */
     .content {
       position: relative;
       z-index: 5;
       width: min(1180px, calc(100% - 40px));
-      min-height: calc(100vh - 94px);
       margin: 0 auto;
       display: flex;
       flex-direction: column;
@@ -224,1199 +109,283 @@
       text-align: center;
     }
 
-    /* =========================================================
-       HERO
-       ========================================================= */
-
-    .hero {
-      position: relative;
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-      padding: 7px 13px;
-      margin-bottom: 24px;
-      border: 1px solid rgba(79, 172, 254, 0.18);
-      border-radius: 999px;
-      background: rgba(79, 172, 254, 0.045);
-      color: #8db6d7;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      backdrop-filter: blur(10px);
-    }
-
-    .eyebrow-line {
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
-      background: var(--cyan-bright);
-      box-shadow: 0 0 10px var(--cyan-bright);
-    }
-
     h1 {
-      position: relative;
-      margin-bottom: 18px;
       font-size: clamp(58px, 10vw, 108px);
-      line-height: 0.9;
       font-weight: 900;
-      letter-spacing: -0.075em;
+      margin-bottom: 18px;
       color: #fff;
-      text-shadow: 0 0 45px rgba(0, 207, 255, 0.13);
     }
-
-    h1::after {
-      content: "";
-      position: absolute;
-      left: 12%;
-      right: 12%;
-      bottom: -9px;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(0, 234, 255, 0.65), transparent);
-      filter: blur(0.4px);
-    }
-
     .gradient-word {
-      background: linear-gradient(105deg, #ffffff 0%, #bcefff 38%, #4facfe 70%, #00eaff 100%);
+      background: linear-gradient(105deg, #fff, #4facfe, #00eaff);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      background-clip: text;
     }
-
     .subtitle {
-      max-width: 620px;
-      margin-bottom: 34px;
-      color: #7f8da0;
-      font-size: clamp(14px, 2vw, 17px);
-      line-height: 1.7;
-      letter-spacing: 0.01em;
+      max-width: 620px; margin-bottom: 34px; color: #7f8da0;
+      font-size: clamp(14px, 2vw, 17px); line-height: 1.7;
     }
 
-    .subtitle strong {
-      color: #c6d9e8;
-      font-weight: 600;
-    }
-
-    /* =========================================================
-       HERO BANNER
-       ========================================================= */
-
-    .hero-banner {
-      position: relative;
-      width: min(820px, 100%);
-      min-height: 96px;
-      margin-bottom: 28px;
-      padding: 20px 26px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-      text-align: left;
-      border: 1px solid var(--border);
-      border-radius: 22px;
-      background: linear-gradient(110deg, rgba(15, 28, 43, 0.78), rgba(7, 13, 22, 0.65));
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      box-shadow: var(--shadow), inset 0 1px 0 rgba(255,255,255,0.035);
-      overflow: hidden;
-    }
-
-    .hero-banner::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(90deg, rgba(0, 234, 255, 0.07), transparent 40%, rgba(54, 124, 255, 0.055));
-      pointer-events: none;
-    }
-
-    .hero-banner::after {
-      content: "";
-      position: absolute;
-      width: 300px;
-      height: 1px;
-      top: 0;
-      left: -300px;
-      background: linear-gradient(90deg, transparent, rgba(0, 234, 255, 0.9), transparent);
-      animation: scan 5s linear infinite;
-    }
-
-    @keyframes scan {
-      0% { left: -300px; }
-      100% { left: 100%; }
-    }
-
-    .banner-left {
-      position: relative;
-      z-index: 2;
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-
-    .banner-icon {
-      width: 48px;
-      height: 48px;
-      flex: 0 0 auto;
-      border-radius: 15px;
-      display: grid;
-      place-items: center;
-      border: 1px solid rgba(0, 234, 255, 0.2);
-      background: radial-gradient(circle, rgba(0, 234, 255, 0.14), rgba(0, 234, 255, 0.015));
-      box-shadow: inset 0 0 18px rgba(0, 234, 255, 0.08), 0 0 25px rgba(0, 234, 255, 0.08);
-    }
-
-    .banner-icon::before,
-    .banner-icon::after {
-      content: "";
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      border: 1px solid rgba(0, 234, 255, 0.65);
-      transform: rotate(45deg);
-    }
-
-    .banner-icon::after {
-      width: 9px;
-      height: 9px;
-      border-color: rgba(79, 172, 254, 0.9);
-    }
-
-    .banner-title {
-      font-size: 14px;
-      font-weight: 800;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .banner-description {
-      margin-top: 4px;
-      color: #708196;
-      font-size: 12px;
-      line-height: 1.5;
-    }
-
-    .banner-brand {
-      position: relative;
-      z-index: 2;
-      white-space: nowrap;
-      font-size: 20px;
-      font-weight: 900;
-      letter-spacing: 0.13em;
-      background: linear-gradient(90deg, #fff, #68dfff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    /* =========================================================
-       WIDGET
-       ========================================================= */
-
+    /* Widget Wrap */
     .widget-wrap {
       position: relative;
       width: min(820px, 100%);
       padding: 12px;
       border-radius: 26px;
-      background: linear-gradient(145deg, rgba(20, 31, 45, 0.88), rgba(5, 10, 17, 0.82));
-      border: 1px solid var(--border-bright);
-      box-shadow: 0 35px 100px rgba(0, 0, 0, 0.72), 0 0 90px rgba(0, 166, 255, 0.09), inset 0 1px 0 rgba(255,255,255,0.055);
+      background: rgba(10, 16, 26, 0.85);
+      border: 1px solid rgba(104, 210, 255, 0.35);
+      box-shadow: 0 35px 100px rgba(0,0,0,0.7), 0 0 90px rgba(0,166,255,0.09);
       backdrop-filter: blur(22px);
-      -webkit-backdrop-filter: blur(22px);
-      transform: perspective(1200px) rotateX(0deg);
-      transition: transform 0.5s cubic-bezier(.2,.8,.2,1), box-shadow 0.5s ease;
     }
-
-    .widget-wrap:hover {
-      transform: perspective(1200px) translateY(-3px);
-      box-shadow: 0 45px 110px rgba(0, 0, 0, 0.76), 0 0 110px rgba(0, 190, 255, 0.13), inset 0 1px 0 rgba(255,255,255,0.07);
-    }
-
-    .widget-topbar {
-      height: 30px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 8px 10px;
-      color: #566579;
-      font-size: 9px;
-      font-weight: 700;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-    }
-
-    .widget-dots {
-      display: flex;
-      gap: 5px;
-    }
-
-    .widget-dots span {
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
-      background: #354253;
-    }
-
-    .widget-label {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-    }
-
-    .widget-label::before {
-      content: "";
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
-      background: var(--cyan-bright);
-      box-shadow: 0 0 8px var(--cyan-bright);
-    }
-
     iframe {
-      border: none;
-      border-radius: 16px;
-      overflow: hidden;
-      width: 100%;
-      height: 340px;
-      display: block;
+      border: none; border-radius: 16px;
+      width: 100%; height: 340px; display: block;
       background: #080d14;
     }
 
-    /* =========================================================
-       FEATURES
-       ========================================================= */
-
+    /* Features */
     .features {
       width: min(820px, 100%);
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
-      margin-top: 18px;
+      gap: 10px; margin-top: 18px;
     }
-
     .feature {
-      position: relative;
-      min-height: 70px;
-      padding: 14px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      border-radius: 15px;
-      border: 1px solid rgba(90, 150, 190, 0.1);
-      background: rgba(8, 14, 22, 0.5);
-      backdrop-filter: blur(12px);
-      transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+      padding: 14px; display: flex; flex-direction: column; align-items: center;
+      border-radius: 15px; border: 1px solid rgba(90, 150, 190, 0.1);
+      background: rgba(8, 14, 22, 0.5); backdrop-filter: blur(12px);
     }
+    .feature-value { color: #dceaf5; font-size: 12px; font-weight: 700; }
+    .feature-label { color: #58687b; font-size: 9px; margin-top: 5px; text-transform: uppercase; }
 
-    .feature:hover {
-      transform: translateY(-4px);
-      border-color: rgba(79, 172, 254, 0.25);
-      background: rgba(15, 27, 40, 0.65);
-    }
-
-    .feature-value {
-      color: #dceaf5;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-    }
-
-    .feature-label {
-      margin-top: 5px;
-      color: #58687b;
-      font-size: 9px;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-    }
-
-    /* =========================================================
-       FOOTER
-       ========================================================= */
-
-    footer {
-      position: relative;
-      z-index: 5;
-      width: 100%;
-      padding: 28px 20px 32px;
-      text-align: center;
-      color: #394553;
-      font-size: 10px;
-      letter-spacing: 0.06em;
-    }
-
-    footer span {
-      color: #536274;
-    }
-
-    /* =========================================================
-       RESPONSIVE
-       ========================================================= */
+    footer { position: relative; z-index: 5; text-align: center; padding: 30px; color: #536274; font-size: 11px; }
 
     @media (max-width: 720px) {
-      header { width: calc(100% - 28px); padding: 18px 0; }
-      .brand-name { font-size: 15px; }
-      .brand-mark { width: 34px; height: 34px; }
-      .status { padding: 7px 10px; font-size: 9px; }
-      .content { width: calc(100% - 28px); padding-top: 55px; }
-      h1 { font-size: clamp(54px, 18vw, 82px); }
-      .subtitle { font-size: 14px; max-width: 430px; }
-      .hero-banner { min-height: auto; padding: 17px; border-radius: 19px; align-items: flex-start; }
-      .banner-left { gap: 11px; }
-      .banner-icon { width: 40px; height: 40px; border-radius: 12px; }
-      .banner-title { font-size: 11px; }
-      .banner-description { font-size: 10px; }
-      .banner-brand { display: none; }
-      .widget-wrap { padding: 8px; border-radius: 20px; }
-      .widget-topbar { height: 27px; }
-      iframe { height: 340px; border-radius: 13px; }
       .features { grid-template-columns: repeat(2, 1fr); }
-      .feature { min-height: 65px; }
-    }
-
-    @media (max-width: 420px) {
-      .status { display: none; }
-      .content { padding-top: 42px; }
-      .eyebrow { font-size: 8px; }
-      .subtitle { margin-bottom: 27px; }
-      .hero-banner { margin-bottom: 18px; }
-      iframe { height: 350px; }
-    }
-
-    /* Reduced motion */
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        scroll-behavior: auto !important;
-        animation-duration: 0.001ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.001ms !important;
-      }
     }
   </style>
 </head>
 <body>
 
-  <!-- =======================================================
-       BACKGROUND LAYERS
-       ======================================================= -->
-
+  <!-- 3D Canvas Background -->
   <canvas id="bg-canvas"></canvas>
-
-  <div class="noise"></div>
-  <div class="grid"></div>
-  <div class="vignette"></div>
-
-  <!-- =======================================================
-       HEADER
-       ======================================================= -->
 
   <header>
     <a class="brand" href="/">
       <div class="brand-mark"></div>
-      <div class="brand-name">
-        SWAP<span>FEE</span>
-      </div>
+      <div class="brand-name">SWAP<span>FEE</span></div>
     </a>
-
-    <div class="status">
-      <span class="status-dot"></span>
-      Network Online
+    <div class="nav-links">
+      <a href="news.html" class="news-btn">Crypto News 📰</a>
     </div>
   </header>
 
-
-  <!-- =======================================================
-       MAIN
-       ======================================================= -->
-
   <main class="content">
-
     <section class="hero">
-
-      <div class="eyebrow">
-        <span class="eyebrow-line"></span>
-        Crypto Swap Infrastructure
-      </div>
-
-      <h1>
-        <span class="gradient-word">SWAP</span>FEE
-      </h1>
-
-      <p class="subtitle">
-        Swap crypto instantly —
-        <strong>compare rates, choose your route,</strong>
-        and execute your exchange without registration.
-      </p>
-
-
-      <!-- =====================================================
-           SWAP FEE BANNER
-           ===================================================== -->
-
-      <div class="hero-banner">
-        <div class="banner-left">
-          <div class="banner-icon"></div>
-          <div>
-            <div class="banner-title">
-              SwapFee Exchange Terminal
-            </div>
-            <div class="banner-description">
-              Search available crypto swap offers and execute your exchange.
-            </div>
-          </div>
-        </div>
-        <div class="banner-brand">
-          SWAP FEE
-        </div>
-      </div>
-
-
-      <!-- =====================================================
-           AFFILIATE WIDGET
-           ===================================================== -->
+      <h1><span class="gradient-word">SWAP</span>FEE</h1>
+      <p class="subtitle">Swap crypto instantly — <strong>compare rates</strong> and execute your exchange without registration.</p>
 
       <div class="widget-wrap">
-        <div class="widget-topbar">
-          <div class="widget-label">
-            Swap Terminal
-          </div>
-          <div class="widget-dots">
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-        </div>
-
-        <iframe
-          id="stealthex-widget"
-          src="https://stealthex.io/widget/f70f0188-5e17-4617-8d56-1323ce5cd134"
-          allow="clipboard-read; clipboard-write">
-        </iframe>
+        <iframe id="stealthex-widget" src="https://stealthex.io/widget/f70f0188-5e17-4617-8d56-1323ce5cd134" allow="clipboard-read; clipboard-write"></iframe>
       </div>
-
-
-      <!-- =====================================================
-           FEATURE GRID
-           ===================================================== -->
 
       <div class="features">
-        <div class="feature">
-          <div class="feature-value">No Account</div>
-          <div class="feature-label">Registration</div>
-        </div>
-        <div class="feature">
-          <div class="feature-value">Competitive</div>
-          <div class="feature-label">Swap Rates</div>
-        </div>
-        <div class="feature">
-          <div class="feature-value">2000+</div>
-          <div class="feature-label">Crypto Assets</div>
-        </div>
-        <div class="feature">
-          <div class="feature-value">24 / 7</div>
-          <div class="feature-label">Availability</div>
-        </div>
+        <div class="feature"><div class="feature-value">No Account</div><div class="feature-label">Registration</div></div>
+        <div class="feature"><div class="feature-value">Competitive</div><div class="feature-label">Swap Rates</div></div>
+        <div class="feature"><div class="feature-value">2000+</div><div class="feature-label">Crypto Assets</div></div>
+        <div class="feature"><div class="feature-value">24 / 7</div><div class="feature-label">Availability</div></div>
       </div>
-
     </section>
-
   </main>
 
-  <!-- =======================================================
-       FOOTER
-       ======================================================= -->
+  <footer>© 2026 SwapFee.com — Powered by StealthEX</footer>
 
-  <footer>
-    © 2026 <span>SwapFee.com</span> — Powered by StealthEX
-  </footer>
-
-
-  <!-- =======================================================
-       THREE.JS
-       ======================================================= -->
-
+  <!-- Three.js for 3D Background -->
   <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
   <script>
-    /*
-     * ==========================================================
-     * SWAPFEE — RICK AND MORTY STYLE VIVID 3D UNIVERSE
-     *
-     * Features:
-     * - Fixed background, floating objects (sine waves)
-     * - Object-level parallax responding to mouse
-     * - Cartoonish planets with craters and neon rims
-     * - High contrast lighting & stylized thick coins
-     * - 3D asteroids floating in space
-     * - Elongated comet/laser pulses connecting nodes
-     * ==========================================================
-     */
-
     const canvas = document.getElementById("bg-canvas");
-
-    const renderer = new THREE.WebGLRenderer({
-      canvas,
-      alpha: true,
-      antialias: true,
-      powerPreference: "high-performance"
-    });
-
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.8));
+    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+    renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setClearColor(0x020408, 0); // Transparent base, blends with CSS
 
     const scene = new THREE.Scene();
-    scene.fog = new THREE.FogExp2(0x020408, 0.012); // Deep dark blue fog
+    scene.fog = new THREE.FogExp2(0x020408, 0.015);
 
-    const camera = new THREE.PerspectiveCamera(
-      55,
-      window.innerWidth / window.innerHeight,
-      0.1,
-      1000
-    );
-    camera.position.set(0, 0, 62);
+    const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.set(0, 0, 50); // كاميرا ثابتة
 
-    /* ==========================================================
-       LIGHTING
-       ========================================================== */
+    // إضاءة كرتونية قوية
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+    scene.add(ambientLight);
+    const dirLight = new THREE.DirectionalLight(0xffffff, 1.5);
+    dirLight.position.set(10, 20, 30);
+    scene.add(dirLight);
 
-    scene.add(new THREE.AmbientLight(0x404060, 1.5));
+    const objects = [];
+    const pointsArray = []; // لربط الخطوط
 
-    // Vivid directional main light
-    const keyLight = new THREE.DirectionalLight(0xffffff, 1.5);
-    keyLight.position.set(20, 30, 40);
-    scene.add(keyLight);
+    // خامة الخطوط الخارجية السوداء (ستايل ريك اند مورتي)
+    const outlineMaterial = new THREE.MeshBasicMaterial({ color: 0x000000, side: THREE.BackSide });
 
-    // Neon Pink backlight
-    const pinkLight = new THREE.PointLight(0xff00ff, 150, 150);
-    pinkLight.position.set(-35, 20, -10);
-    scene.add(pinkLight);
-
-    // Vivid Cyan side light
-    const cyanLight = new THREE.PointLight(0x00eaff, 150, 150);
-    cyanLight.position.set(35, -20, -5);
-    scene.add(cyanLight);
-
-    // Lime / Yellow accent light
-    const limeLight = new THREE.PointLight(0xbaff00, 100, 100);
-    limeLight.position.set(-10, -35, 10);
-    scene.add(limeLight);
-
-    /* ==========================================================
-       UTILITY — TEXTURES
-       ========================================================== */
-
-    // Generate cartoon planet with craters
-    function makeCartoonPlanetTexture(baseColor, craterColor) {
-      const c = document.createElement("canvas");
-      c.width = 512;
-      c.height = 512;
-      const ctx = c.getContext("2d");
-
-      // Base color
-      ctx.fillStyle = baseColor;
-      ctx.fillRect(0, 0, c.width, c.height);
-
-      // Wobbly continents/bands to add variation
-      for (let i = 0; i < 8; i++) {
-        ctx.fillStyle = craterColor;
-        ctx.globalAlpha = 0.3;
-        ctx.beginPath();
-        let cx = Math.random() * c.width;
-        let cy = Math.random() * c.height;
-        let r = 40 + Math.random() * 80;
-        ctx.arc(cx, cy, r, 0, Math.PI * 2);
-        ctx.fill();
-      }
-      
-      ctx.globalAlpha = 1.0;
-
-      // Draw distinct cartoon craters
-      const numCraters = 15 + Math.floor(Math.random() * 15);
-      for (let i = 0; i < numCraters; i++) {
-        const cx = Math.random() * c.width;
-        const cy = Math.random() * c.height;
-        const r = 8 + Math.random() * 25;
-
-        // Crater base
-        ctx.fillStyle = craterColor;
-        ctx.beginPath();
-        ctx.arc(cx, cy, r, 0, Math.PI * 2);
-        ctx.fill();
-
-        // Crater inner shadow (crescent)
-        ctx.fillStyle = "rgba(0,0,0,0.35)";
-        ctx.beginPath();
-        ctx.arc(cx - r*0.15, cy - r*0.15, r*0.85, 0, Math.PI * 2);
-        ctx.fill();
-
-        // Crater rim highlight
-        ctx.strokeStyle = "rgba(255,255,255,0.2)";
-        ctx.lineWidth = 2;
-        ctx.beginPath();
-        ctx.arc(cx, cy, r, 0, Math.PI * 2);
-        ctx.stroke();
-      }
-
-      const texture = new THREE.CanvasTexture(c);
-      texture.wrapS = THREE.RepeatWrapping;
-      texture.wrapT = THREE.ClampToEdgeWrapping;
-      texture.colorSpace = THREE.SRGBColorSpace;
-      return texture;
-    }
-
-    // Generate bold 3D coin faces
-    function makeCoinTexture(symbol, mainColor, accentColor) {
-      const c = document.createElement("canvas");
-      c.width = 256;
-      c.height = 256;
-      const ctx = c.getContext("2d");
-
-      // Radial gradient background
-      const bg = ctx.createRadialGradient(128, 128, 10, 128, 128, 128);
-      bg.addColorStop(0, mainColor);
-      bg.addColorStop(1, accentColor);
-      ctx.fillStyle = bg;
-      ctx.fillRect(0, 0, 256, 256);
-
-      // Inner border rings
-      ctx.strokeStyle = "rgba(255,255,255,0.8)";
-      ctx.lineWidth = 6;
-      ctx.beginPath();
-      ctx.arc(128, 128, 110, 0, Math.PI * 2);
-      ctx.stroke();
-
-      ctx.strokeStyle = "rgba(0,0,0,0.3)";
-      ctx.lineWidth = 4;
-      ctx.beginPath();
-      ctx.arc(128, 128, 92, 0, Math.PI * 2);
-      ctx.stroke();
-
-      // Symbol
-      ctx.textAlign = "center";
-      ctx.textBaseline = "middle";
-      const fontSize = symbol.length > 2 ? 65 : 110;
-      ctx.font = `900 ${fontSize}px "Arial Black", sans-serif`;
-
-      // Shadow/3D effect on text
-      ctx.fillStyle = "rgba(0,0,0,0.5)";
-      ctx.fillText(symbol, 133, 133);
-
-      ctx.fillStyle = "#ffffff";
-      ctx.fillText(symbol, 128, 128);
-
-      const texture = new THREE.CanvasTexture(c);
-      texture.colorSpace = THREE.SRGBColorSpace;
-      return texture;
-    }
-
-    /* ==========================================================
-       OBJECT CREATION
-       ========================================================== */
-
-    // We store all floating/interactive objects here
-    const nodes = [];
-
-    // Factory for Cartoon Planets
-    function createPlanet({ size, position, baseColor, craterColor, rimColor, ringColor }) {
+    // دالة إنشاء الكواكب الكرتونية
+    function createToonPlanet(color, size, x, y, z) {
       const group = new THREE.Group();
-
-      // Core planet mesh
-      const texture = makeCartoonPlanetTexture(baseColor, craterColor);
-      const geometry = new THREE.SphereGeometry(size, 32, 32);
       
-      // Toon material gives it that flat, shaded animated look
-      const material = new THREE.MeshToonMaterial({ 
-        map: texture,
-        bumpMap: texture,
-        bumpScale: 0.05
-      });
-      const planet = new THREE.Mesh(geometry, material);
-      group.add(planet);
+      const geo = new THREE.DodecahedronGeometry(size, 1);
+      const mat = new THREE.MeshToonMaterial({ color: color });
+      const mesh = new THREE.Mesh(geo, mat);
+      group.add(mesh);
 
-      // Neon glowing rim (BackSide additive blending)
-      const rimGeometry = new THREE.SphereGeometry(size * 1.15, 32, 32);
-      const rimMaterial = new THREE.MeshBasicMaterial({
-        color: rimColor,
-        side: THREE.BackSide,
-        transparent: true,
-        opacity: 0.7,
-        blending: THREE.AdditiveBlending
-      });
-      const rim = new THREE.Mesh(rimGeometry, rimMaterial);
-      group.add(rim);
+      // إضافة الخط الأسود الخارجي
+      const outline = new THREE.Mesh(geo, outlineMaterial);
+      outline.scale.setScalar(1.08);
+      group.add(outline);
 
-      // Optional rings
-      if (ringColor) {
-        const ringGeo = new THREE.TorusGeometry(size * 1.6, size * 0.1, 16, 100);
-        const ringMat = new THREE.MeshToonMaterial({ color: ringColor });
-        const ring = new THREE.Mesh(ringGeo, ringMat);
-        ring.rotation.x = Math.PI * 0.4;
-        ring.rotation.y = Math.PI * 0.1;
-        group.add(ring);
+      // تفاصيل حفر (Craters)
+      const craterGeo = new THREE.CylinderGeometry(size*0.2, size*0.2, size*0.1, 8);
+      const craterMat = new THREE.MeshToonMaterial({ color: 0x333333 });
+      const crater = new THREE.Mesh(craterGeo, craterMat);
+      crater.position.set(0, size*0.9, size*0.3);
+      crater.rotation.x = Math.PI/2;
+      group.add(crater);
+
+      group.position.set(x, y, z);
+      
+      // معلومات الحركة
+      group.userData = {
+        baseX: x, baseY: y, baseZ: z,
+        speedX: Math.random() * 0.02, speedY: Math.random() * 0.02,
+        rotSpeedX: Math.random() * 0.01, rotSpeedY: Math.random() * 0.01
+      };
+
+      scene.add(group);
+      objects.push(group);
+      pointsArray.push(group.position);
+      return group;
+    }
+
+    // دالة إنشاء عملات معدنية 3D سميكة
+    function createToonCoin(color, size, x, y, z) {
+      const group = new THREE.Group();
+      
+      const geo = new THREE.CylinderGeometry(size, size, size * 0.4, 32);
+      const mat = new THREE.MeshToonMaterial({ color: color });
+      const mesh = new THREE.Mesh(geo, mat);
+      mesh.rotation.x = Math.PI / 2;
+      group.add(mesh);
+
+      const outline = new THREE.Mesh(geo, outlineMaterial);
+      outline.scale.setScalar(1.08);
+      outline.rotation.x = Math.PI / 2;
+      group.add(outline);
+
+      group.position.set(x, y, z);
+      
+      group.userData = {
+        baseX: x, baseY: y, baseZ: z,
+        speedX: Math.random() * 0.015, speedY: Math.random() * 0.015,
+        rotSpeedX: Math.random() * 0.03, rotSpeedY: Math.random() * 0.03
+      };
+
+      scene.add(group);
+      objects.push(group);
+      pointsArray.push(group.position);
+      return group;
+    }
+
+    // إضافة الكائنات للفضاء
+    createToonPlanet(0xff0055, 4, -25, 15, -10);
+    createToonPlanet(0x00ff88, 3, 28, 10, -5);
+    createToonPlanet(0x8800ff, 5, -30, -15, -15);
+    createToonPlanet(0x00ccff, 2.5, 30, -20, -10);
+    createToonCoin(0xffaa00, 2.5, -15, 25, 0);
+    createToonCoin(0xaaaaaa, 2, 18, 22, -5);
+    createToonCoin(0x55ff55, 2.2, 15, -25, 5);
+
+    // الخطوط المتصلة
+    const lineMaterial = new THREE.LineBasicMaterial({ color: 0x00eaff, transparent: true, opacity: 0.3 });
+    const lineGeo = new THREE.BufferGeometry();
+    const linesMesh = new THREE.LineSegments(lineGeo, lineMaterial);
+    scene.add(linesMesh);
+
+    // النبضات الضوئية (الكرات الصغيرة التي تسري في الخطوط)
+    const lights = [];
+    const lightGeo = new THREE.SphereGeometry(0.3, 8, 8);
+    const lightMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
+    for(let i=0; i<3; i++) {
+        const lightMesh = new THREE.Mesh(lightGeo, lightMat);
+        scene.add(lightMesh);
+        lights.push({ mesh: lightMesh, progress: Math.random(), startIndex: 0, endIndex: 1 });
+    }
+
+    // التفاعل مع الماوس
+    let mouseX = 0; let mouseY = 0;
+    document.addEventListener('mousemove', (e) => {
+      mouseX = (e.clientX / window.innerWidth) * 2 - 1;
+      mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
+    });
+
+    const clock = new THREE.Clock();
+
+    function animate() {
+      requestAnimationFrame(animate);
+      const time = clock.getElapsedTime();
+
+      // تحريك المجسمات بشكل منفصل (طوفان)
+      const positions = [];
+      objects.forEach(obj => {
+        // حركة الطفو
+        obj.position.y = obj.userData.baseY + Math.sin(time * 2 + obj.userData.speedY * 100) * 2;
+        obj.position.x = obj.userData.baseX + Math.cos(time * 2 + obj.userData.speedX * 100) * 2;
         
-        // Ring glow
-        const ringGlowGeo = new THREE.TorusGeometry(size * 1.6, size * 0.15, 16, 100);
-        const ringGlowMat = new THREE.MeshBasicMaterial({ 
-          color: ringColor, 
-          transparent: true, 
-          opacity: 0.4, 
-          blending: THREE.AdditiveBlending 
-        });
-        const ringGlow = new THREE.Mesh(ringGlowGeo, ringGlowMat);
-        ringGlow.rotation.copy(ring.rotation);
-        group.add(ringGlow);
+        // تفاعل المجسم مع الماوس (Parallax)
+        obj.position.x += mouseX * 2;
+        obj.position.y += mouseY * 2;
+
+        // الدوران
+        obj.rotation.x += obj.userData.rotSpeedX;
+        obj.rotation.y += obj.userData.rotSpeedY;
+
+        positions.push(obj.position.x, obj.position.y, obj.position.z);
+      });
+
+      // تحديث الخطوط لتربط بين المجسمات المتحركة
+      const linePositions = [];
+      for(let i=0; i<objects.length; i++) {
+        for(let j=i+1; j<objects.length; j++) {
+            // رسم خطوط لبعض المسافات القريبة
+            const dist = objects[i].position.distanceTo(objects[j].position);
+            if(dist < 50) {
+                linePositions.push(
+                    objects[i].position.x, objects[i].position.y, objects[i].position.z,
+                    objects[j].position.x, objects[j].position.y, objects[j].position.z
+                );
+            }
+        }
       }
+      linesMesh.geometry.setAttribute('position', new THREE.Float32BufferAttribute(linePositions, 3));
 
-      // Physics / Movement parameters
-      group.position.set(...position);
-      group.userData = {
-        base: new THREE.Vector3(...position),
-        phase: Math.random() * Math.PI * 2,       // For sine wave
-        floatSpeed: 0.8 + Math.random() * 1.2,    // Speed of bobbing
-        floatAmp: 1.5 + Math.random() * 2.0,      // Height of bobbing
-        rotSpeedX: (Math.random() - 0.5) * 0.005,
-        rotSpeedY: (Math.random() - 0.5) * 0.005,
-        parallax: 2.0 + Math.random() * 3.0       // Sensitivity to mouse
-      };
+      // تحريك الضوء عبر الخطوط
+      lights.forEach(light => {
+          light.progress += 0.01;
+          if(light.progress >= 1) {
+              light.progress = 0;
+              light.startIndex = Math.floor(Math.random() * objects.length);
+              light.endIndex = Math.floor(Math.random() * objects.length);
+          }
+          const start = objects[light.startIndex].position;
+          const end = objects[light.endIndex].position;
+          light.mesh.position.lerpVectors(start, end, light.progress);
+      });
 
-      // Used for raycasting hover scale
-      planet.userData.nodeGroup = group; 
-      rim.userData.nodeGroup = group;
-
-      scene.add(group);
-      nodes.push(group);
-      return group;
+      renderer.render(scene, camera);
     }
-
-    // Factory for Cartoon Coins
-    function createCoin({ symbol, radius, depth, position, mainColor, accentColor, edgeColor }) {
-      const group = new THREE.Group();
-
-      const faceTexture = makeCoinTexture(symbol, mainColor, accentColor);
-      const sideMaterial = new THREE.MeshStandardMaterial({ 
-        color: edgeColor, 
-        metalness: 0.6, 
-        roughness: 0.2 
-      });
-      const faceMaterial = new THREE.MeshStandardMaterial({ 
-        map: faceTexture, 
-        metalness: 0.3, 
-        roughness: 0.4 
-      });
-
-      const coinGeometry = new THREE.CylinderGeometry(radius, radius, depth, 64);
-      const coin = new THREE.Mesh(coinGeometry, [sideMaterial, faceMaterial, faceMaterial]);
-      
-      // Face it towards camera roughly
-      coin.rotation.x = Math.PI / 2;
-      group.add(coin);
-
-      // Glowing edge torus
-      const rimGeo = new THREE.TorusGeometry(radius * 1.02, radius * 0.08, 16, 64);
-      const rimMat = new THREE.MeshBasicMaterial({
-        color: edgeColor,
-        transparent: true,
-        opacity: 0.8,
-        blending: THREE.AdditiveBlending
-      });
-      const rim = new THREE.Mesh(rimGeo, rimMat);
-      rim.rotation.x = Math.PI / 2;
-      group.add(rim);
-
-      group.position.set(...position);
-      group.userData = {
-        base: new THREE.Vector3(...position),
-        phase: Math.random() * Math.PI * 2,
-        floatSpeed: 1.0 + Math.random() * 1.5,
-        floatAmp: 1.0 + Math.random() * 2.0,
-        rotSpeedX: (Math.random() - 0.5) * 0.01,
-        rotSpeedY: (Math.random() - 0.5) * 0.01,
-        rotSpeedZ: (Math.random() > 0.5 ? 1 : -1) * (0.01 + Math.random() * 0.02),
-        parallax: 3.0 + Math.random() * 4.0,
-        isCoin: true
-      };
-
-      coin.userData.nodeGroup = group;
-      scene.add(group);
-      nodes.push(group);
-      return group;
-    }
-
-    /* ==========================================================
-       SCENE POPULATION
-       ========================================================== */
-
-    // Planets
-    createPlanet({
-      size: 7.5,
-      position: [-32, 22, -15],
-      baseColor: "#17b978",       // Toxic Green
-      craterColor: "#086940",     // Dark Green
-      rimColor: 0x00ff88,
-      ringColor: 0xff00ff         // Magenta ring
-    });
-
-    createPlanet({
-      size: 6.0,
-      position: [34, 18, -10],
-      baseColor: "#6c00ff",       // Deep Purple
-      craterColor: "#350080",
-      rimColor: 0x9d00ff,
-      ringColor: 0x00ffff         // Cyan ring
-    });
-
-    createPlanet({
-      size: 5.5,
-      position: [-28, -20, -8],
-      baseColor: "#ff007f",       // Hot Pink
-      craterColor: "#800040",
-      rimColor: 0xff4da6
-    });
-
-    createPlanet({
-      size: 3.5,
-      position: [30, -22, -12],
-      baseColor: "#ffaa00",       // Bright Orange
-      craterColor: "#805500",
-      rimColor: 0xffcc00
-    });
-
-    // Coins
-    createCoin({
-      symbol: "₿",
-      radius: 4.0, depth: 1.2,
-      position: [-38, 0, -2],
-      mainColor: "#ffb300", accentColor: "#ff8c00", edgeColor: 0xffd700
-    });
-
-    createCoin({
-      symbol: "ETH",
-      radius: 3.5, depth: 1.0,
-      position: [24, 6, 2],
-      mainColor: "#627eea", accentColor: "#3f54a3", edgeColor: 0x8a92ff
-    });
-
-    createCoin({
-      symbol: "₮",
-      radius: 3.2, depth: 0.9,
-      position: [6, 25, 0],
-      mainColor: "#26a17b", accentColor: "#145c46", edgeColor: 0x33ffbb
-    });
-
-    createCoin({
-      symbol: "SOL",
-      radius: 3.2, depth: 0.9,
-      position: [-12, -26, -2],
-      mainColor: "#9945ff", accentColor: "#14f195", edgeColor: 0x00ffcc
-    });
-
-    createCoin({
-      symbol: "BNB",
-      radius: 2.8, depth: 0.8,
-      position: [36, -4, -4],
-      mainColor: "#f3ba2f", accentColor: "#c29320", edgeColor: 0xffe066
-    });
-
-    // Asteroids
-    for (let i = 0; i < 35; i++) {
-      const radius = 0.5 + Math.random() * 1.5;
-      // Icosahedron with detail 0 makes perfect low-poly cartoon rocks
-      const geo = new THREE.IcosahedronGeometry(radius, 0); 
-      
-      const isDark = Math.random() > 0.5;
-      const mat = new THREE.MeshToonMaterial({ 
-        color: isDark ? 0x4a4a5a : 0x736b5c,
-        flatShading: true 
-      });
-      
-      const asteroid = new THREE.Mesh(geo, mat);
-      
-      const x = (Math.random() - 0.5) * 120;
-      const y = (Math.random() - 0.5) * 90;
-      const z = -10 - Math.random() * 40;
-      asteroid.position.set(x, y, z);
-
-      asteroid.userData = {
-        base: new THREE.Vector3(x, y, z),
-        phase: Math.random() * Math.PI * 2,
-        floatSpeed: 0.2 + Math.random() * 0.8,
-        floatAmp: 2.0 + Math.random() * 4.0,
-        rotSpeedX: (Math.random() - 0.5) * 0.02,
-        rotSpeedY: (Math.random() - 0.5) * 0.02,
-        rotSpeedZ: (Math.random() - 0.5) * 0.02,
-        parallax: 1.0 + Math.random() * 2.0
-      };
-
-      scene.add(asteroid);
-      nodes.push(asteroid); // Animate asteroids too
-    }
-
-    // Starfield
-    const starGeo = new THREE.BufferGeometry();
-    const starCount = window.innerWidth < 700 ? 300 : 700;
-    const starPos = new Float32Array(starCount * 3);
-    const starColors = new Float32Array(starCount * 3);
-
-    const c1 = new THREE.Color(0x00eaff);
-    const c2 = new THREE.Color(0xff00ff);
-    const c3 = new THREE.Color(0xffffff);
-
-    for (let i = 0; i < starCount; i++) {
-      starPos[i * 3] = (Math.random() - 0.5) * 200;
-      starPos[i * 3 + 1] = (Math.random() - 0.5) * 150;
-      starPos[i * 3 + 2] = -40 - Math.random() * 60;
-
-      let r = Math.random();
-      let col = r > 0.8 ? c1 : (r > 0.6 ? c2 : c3);
-      starColors[i * 3] = col.r;
-      starColors[i * 3 + 1] = col.g;
-      starColors[i * 3 + 2] = col.b;
-    }
-    starGeo.setAttribute("position", new THREE.BufferAttribute(starPos, 3));
-    starGeo.setAttribute("color", new THREE.BufferAttribute(starColors, 3));
-
-    const starMat = new THREE.PointsMaterial({
-      size: 0.4,
-      vertexColors: true,
-      transparent: true,
-      opacity: 0.8
-    });
-    const stars = new THREE.Points(starGeo, starMat);
-    scene.add(stars);
-
-    /* ==========================================================
-       NETWORK CONNECTIONS & PULSES
-       ========================================================== */
-
-    // Create connections between specific primary nodes (index 0 to 8)
-    const connections = [
-      [0, 1], [0, 4], [0, 6], [1, 5], [1, 8], 
-      [2, 7], [2, 4], [3, 8], [3, 6], [4, 7], 
-      [5, 2], [6, 2], [7, 8], [4, 5]
-    ];
-
-    const lines = [];
-    const lineMat = new THREE.LineBasicMaterial({
-      color: 0x00eaff,
-      transparent: true,
-      opacity: 0.45,
-      blending: THREE.AdditiveBlending
-    });
-    // Thicker glow overlay
-    const glowMat = new THREE.LineBasicMaterial({
-      color: 0x00aaff,
-      transparent: true,
-      opacity: 0.15,
-      blending: THREE.AdditiveBlending,
-      linewidth: 3 // WebGL limits this, but we try
-    });
-
-    connections.forEach(pair => {
-      const geo = new THREE.BufferGeometry();
-      geo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(6), 3));
-      
-      const line = new THREE.Line(geo, lineMat);
-      const glow = new THREE.Line(geo, glowMat);
-      
-      scene.add(line);
-      scene.add(glow);
-
-      lines.push({
-        nodeA: nodes[pair[0]],
-        nodeB: nodes[pair[1]],
-        geo: geo
-      });
-    });
-
-    // Pulses (Comets / Laser blasts) traversing the lines
-    const pulses = [];
     
-    function spawnPulse() {
-      const line = lines[Math.floor(Math.random() * lines.length)];
-      
-      // Elongated capsule/cylinder for the comet
-      const pulseGeo = new THREE.CylinderGeometry(0.08, 0.3, 3.5, 8);
-      pulseGeo.rotateX(Math.PI / 2); // Align Z-axis for lookAt
-      
-      // Alternate colors
-      const isPink = Math.random() > 0.5;
-      const pulseMat = new THREE.MeshBasicMaterial({
-        color: isPink ? 0xff00ff : 0x00eaff,
-        transparent: true,
-        opacity: 0.9,
-        blending: THREE.AdditiveBlending
-      });
-
-      const mesh = new THREE.Mesh(pulseGeo, pulseMat);
-      scene.add(mesh);
-
-      // Random direction A->B or B->A
-      const reverse = Math.random() > 0.5;
-
-      pulses.push({
-        mesh: mesh,
-        startNode: reverse ? line.nodeB : line.nodeA,
-        endNode: reverse ? line.nodeA : line.nodeB,
-        progress: 0,
-        speed: 0.008 + Math.random() * 0.012
-      });
-    }
-
-    /* ==========================================================
-       INTERACTION
-       ========================================================== */
-
-    const mouse = { x: 0, y: 0 };
-    const targetMouse = { x: 0, y: 0 };
-    const raycaster = new THREE.Raycaster();
-    const pointer = new THREE.Vector2();
-    let hoveredNode = null;
-
-    function onPointerMove(clientX, clientY) {
-      targetMouse.x = (clientX / window.innerWidth) * 2 - 1;
-      targetMouse.y = -(clientY / window.innerHeight) * 2 + 1;
-      pointer.set(targetMouse.x, targetMouse.y);
-    }
-
-    window.addEventListener("mousemove", (e) => onPointerMove(e.clientX, e.clientY), { passive: true });
-    window.addEventListener("touchmove", (e) => {
-      if (e.touches.length) onPointerMove(e.touches[0].clientX, e.touches[0].clientY);
-    }, { passive: true });
-
+    // توافق مع تغير حجم الشاشة
     window.addEventListener("resize", () => {
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(window.innerWidth, window.innerHeight);
     });
-
-    /* ==========================================================
-       ANIMATION LOOP
-       ========================================================== */
-
-    const clock = new THREE.Clock();
-    let frameCounter = 0;
-
-    function animate() {
-      requestAnimationFrame(animate);
-      const time = clock.getElapsedTime();
-      const delta = clock.getDelta();
-
-      // Smooth mouse interpolation
-      mouse.x += (targetMouse.x - mouse.x) * 0.05;
-      mouse.y += (targetMouse.y - mouse.y) * 0.05;
-
-      // Notice: NO global rotation applied to the scene/world. It stays perfectly fixed.
-
-      // 1. Update all nodes (floating + independent rotation + parallax)
-      nodes.forEach(node => {
-        const data = node.userData;
-        
-        // Independent Rotation
-        if (data.isCoin) {
-          node.rotation.z += data.rotSpeedZ;
-        } else {
-          node.rotation.x += data.rotSpeedX;
-          node.rotation.y += data.rotSpeedY;
-          if (data.rotSpeedZ) node.rotation.z += data.rotSpeedZ; // asteroids
-        }
-
-        // Float (sine wave on Y axis)
-        const floatOffset = Math.sin(time * data.floatSpeed + data.phase) * data.floatAmp;
-        
-        // Parallax offset relative to mouse (shifts position, keeps background fixed)
-        const depthFactor = node.position.z < 0 ? 0.4 : 1.0; 
-        const px = mouse.x * data.parallax * depthFactor;
-        const py = mouse.y * data.parallax * depthFactor;
-
-        // Apply positions
-        node.position.x = data.base.x + px;
-        node.position.y = data.base.y + py + floatOffset;
-
-        // Hover scale logic
-        const targetScale = data.hover ? 1.15 : 1.0;
-        const currentScale = node.scale.x;
-        const newScale = currentScale + (targetScale - currentScale) * 0.1;
-        node.scale.setScalar(newScale);
-      });
-
-      // 2. Raycaster for hover effects (only checking primary nodes 0-8)
-      raycaster.setFromCamera(pointer, camera);
-      const primaryMeshes = [];
-      for(let i=0; i<9; i++) {
-        // Collect meshes inside the groups
-        nodes[i].children.forEach(c => primaryMeshes.push(c));
-      }
-      const intersects = raycaster.intersectObjects(primaryMeshes, false);
-      
-      let nextHovered = null;
-      if (intersects.length > 0) {
-        nextHovered = intersects[0].object.userData.nodeGroup;
-      }
-
-      if (hoveredNode && hoveredNode !== nextHovered) {
-        hoveredNode.userData.hover = false;
-      }
-      if (nextHovered) {
-        nextHovered.userData.hover = true;
-        hoveredNode = nextHovered;
-      }
-
-      // 3. Update connection lines based on new node positions
-      lines.forEach(line => {
-        const pos = line.geo.attributes.position.array;
-        pos[0] = line.nodeA.position.x;
-        pos[1] = line.nodeA.position.y;
-        pos[2] = line.nodeA.position.z;
-        pos[3] = line.nodeB.position.x;
-        pos[4] = line.nodeB.position.y;
-        pos[5] = line.nodeB.position.z;
-        line.geo.attributes.position.needsUpdate = true;
-      });
-
-      // 4. Update traveling pulses
-      for (let i = pulses.length - 1; i >= 0; i--) {
-        const p = pulses[i];
-        p.progress += p.speed;
-
-        if (p.progress >= 1.0) {
-          scene.remove(p.mesh);
-          p.mesh.geometry.dispose();
-          p.mesh.material.dispose();
-          pulses.splice(i, 1);
-        } else {
-          // Lerp position
-          const currentPos = new THREE.Vector3().lerpVectors(p.startNode.position, p.endNode.position, p.progress);
-          p.mesh.position.copy(currentPos);
-          // Look at target (aligns the elongated cylinder along the line)
-          p.mesh.lookAt(p.endNode.position);
-          
-          // Fade in/out
-          if (p.progress < 0.1) p.mesh.material.opacity = (p.progress / 0.1) * 0.9;
-          else if (p.progress > 0.9) p.mesh.material.opacity = ((1.0 - p.progress) / 0.1) * 0.9;
-          else p.mesh.material.opacity = 0.9;
-        }
-      }
-
-      // Spawn new pulses periodically
-      frameCounter++;
-      if (frameCounter % (window.innerWidth < 700 ? 50 : 35) === 0) {
-        spawnPulse();
-      }
-
-      renderer.render(scene, camera);
-    }
-
-    // Initial bursts
-    setTimeout(spawnPulse, 200);
-    setTimeout(spawnPulse, 600);
-    setTimeout(spawnPulse, 1000);
 
     animate();
   </script>
