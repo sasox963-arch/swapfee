@@ -1,1 +1,182 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- SEO Tags (Very Important for Google) -->
+  <title>Crypto News & Market Updates | SwapFee</title>
+  <meta name="description" content="Stay updated with the latest cryptocurrency news, Bitcoin trends, Ethereum updates, and blockchain technology market analysis brought to you by SwapFee.">
+  <meta name="keywords" content="crypto news, cryptocurrency, bitcoin news, ethereum, blockchain, market updates, SwapFee">
+  <meta name="robots" content="index, follow">
+
+  <style>
+    :root {
+      --bg: #020408;
+      --cyan: #4facfe;
+      --cyan-bright: #00eaff;
+      --text: #f5f9ff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: Inter, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      background-image: radial-gradient(circle at top, #0f1c2e 0%, #020408 60%);
+    }
+
+    /* Header matching the main site */
+    header {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 28px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(0, 234, 255, 0.2);
+    }
+
+    .brand {
+      display: flex; align-items: center; gap: 12px;
+      text-decoration: none; color: white;
+    }
+    .brand-name { font-size: 18px; font-weight: 800; letter-spacing: 0.18em; }
+    .brand-name span { color: var(--cyan-bright); }
+
+    .back-btn {
+      padding: 10px 20px;
+      border-radius: 99px;
+      background: transparent;
+      border: 1px solid var(--text);
+      color: var(--text);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+    .back-btn:hover { background: var(--text); color: var(--bg); }
+
+    /* Main SEO Content */
+    main {
+      width: min(1000px, calc(100% - 40px));
+      margin: 40px auto;
+    }
+
+    h1 {
+      font-size: clamp(32px, 5vw, 48px);
+      margin-bottom: 10px;
+      color: var(--cyan-bright);
+    }
+
+    .page-desc {
+      color: #8290a3;
+      font-size: 16px;
+      margin-bottom: 40px;
+      line-height: 1.6;
+    }
+
+    /* News Grid */
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+    }
+
+    article.news-card {
+      background: rgba(10, 16, 26, 0.85);
+      border: 1px solid rgba(104, 210, 255, 0.15);
+      border-radius: 16px;
+      padding: 25px;
+      transition: transform 0.3s ease;
+    }
+    article.news-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--cyan-bright);
+    }
+
+    .news-date {
+      font-size: 12px;
+      color: var(--cyan);
+      margin-bottom: 10px;
+      display: block;
+      font-weight: bold;
+    }
+
+    .news-card h2 {
+      font-size: 20px;
+      margin-bottom: 15px;
+      line-height: 1.4;
+      color: #fff;
+    }
+
+    .news-card p {
+      color: #7f8da0;
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .read-more {
+      display: inline-block;
+      color: var(--cyan-bright);
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 14px;
+    }
+    .read-more:hover { text-decoration: underline; }
+
+    footer { text-align: center; padding: 40px; color: #536274; font-size: 12px; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 50px; }
+
+  </style>
+</head>
+<body>
+
+  <header>
+    <a class="brand" href="index.html">
+      <div class="brand-name">SWAP<span>FEE</span></div>
+    </a>
+    <a href="index.html" class="back-btn">← Back to Swap</a>
+  </header>
+
+  <main>
+    <!-- H1 is critical for SEO -->
+    <h1>Latest Crypto Market News</h1>
+    <p class="page-desc">Stay ahead of the market. Read our latest insights on Bitcoin, Ethereum, Altcoins, and Blockchain technology trends.</p>
+
+    <div class="news-grid">
+      
+      <!-- Article 1 -->
+      <article class="news-card">
+        <span class="news-date">Sept 17, 2026</span>
+        <h2>Bitcoin Surges Past Key Resistance Levels</h2>
+        <p>In a surprising market movement today, Bitcoin has broken through its major resistance barriers, signaling a potential bullish run for the upcoming quarter. Institutional adoption continues to rise.</p>
+        <a href="#" class="read-more">Read Full Story →</a>
+      </article>
+
+      <!-- Article 2 -->
+      <article class="news-card">
+        <span class="news-date">Sept 16, 2026</span>
+        <h2>Ethereum's New Upgrade: What It Means for Gas Fees</h2>
+        <p>The latest network upgrade on the Ethereum blockchain aims to significantly reduce layer-2 gas fees. Developers expect a massive influx of decentralized applications.</p>
+        <a href="#" class="read-more">Read Full Story →</a>
+      </article>
+
+      <!-- Article 3 -->
+      <article class="news-card">
+        <span class="news-date">Sept 15, 2026</span>
+        <h2>Top 5 Altcoins to Watch This Month</h2>
+        <p>With Bitcoin dominance shifting, several altcoins are showing promising chart patterns. We dive deep into the technology and market cap of the top performers this week.</p>
+        <a href="#" class="read-more">Read Full Story →</a>
+      </article>
+
+    </div>
+  </main>
+
+  <footer>© 2026 SwapFee.com — Crypto News & Analytics</footer>
+
+</body>
+</html>
